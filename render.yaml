@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: kita-kita
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AI_ANALYSIS_OPTIONAL
+        value: "true"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: report-photos
+      - key: ADMIN_SECRET
+        sync: false

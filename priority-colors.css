@@ -1,0 +1,60 @@
+:root {
+    --priority-high-background: #5c2424;
+    --priority-high-text: #ffd1cc;
+    --priority-high-border: #d36f67;
+    --priority-medium-background: #59451f;
+    --priority-medium-text: #ffe4a3;
+    --priority-medium-border: #c99b39;
+    --priority-low-background: #18483c;
+    --priority-low-text: #c6f2d7;
+    --priority-low-border: #63b98b;
+}
+
+.priority-tag,
+.priority-select {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font: 700 11px "Trebuchet MS", "Segoe UI", sans-serif;
+    text-transform: uppercase;
+}
+
+.priority-tag[data-priority="high"],
+.priority-select[data-priority="high"] {
+    background: var(--priority-high-background);
+    color: var(--priority-high-text);
+    border-color: var(--priority-high-border);
+}
+
+.priority-tag[data-priority="medium"],
+.priority-select[data-priority="medium"] {
+    background: var(--priority-medium-background);
+    color: var(--priority-medium-text);
+    border-color: var(--priority-medium-border);
+}
+
+.priority-tag[data-priority="low"],
+.priority-select[data-priority="low"] {
+    background: var(--priority-low-background);
+    color: var(--priority-low-text);
+    border-color: var(--priority-low-border);
+}
+
+.priority-select {
+    min-width: 112px;
+    cursor: pointer;
+}
+
+.priority-select:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.priority-select option {
+    background: #0b3038;
+    color: #eaf7f1;
+}

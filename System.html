@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b3038">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>Kita - Kita</title>
+
+    <style>
+        :root {
+            --page-deep: #0b3038;
+            --surface: rgba(8, 48, 55, 0.9);
+            --surface-soft: rgba(13, 67, 70, 0.82);
+            --surface-dark: rgba(5, 34, 40, 0.86);
+            --line: rgba(194, 235, 215, 0.26);
+            --text: #eaf7f1;
+            --muted: #c1ddd3;
+            --mint: #a9e6c4;
+            --amber: #f5d58a;
+            --amber-strong: #e9bd5c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--page-deep);
+        }
+
+        body {
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+            background: var(--page-deep);
+            background: linear-gradient(90deg, rgba(26, 86, 110, 1) 0%, rgba(36, 128, 91, 1) 50%, rgba(26, 86, 110, 1) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 700;
+        }
+
+        nav {
+            height: 72px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(5, 34, 40, 0.92);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            color: var(--mint);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 34px;
+            height: 34px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .logo span {
+            color: var(--mint);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: var(--mint);
+            border-radius: 50%;
+
+            box-shadow: 0 0 10px rgba(169, 230, 196, 0.7);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 70px 30px;
+        }
+
+        .submission-page .hero {
+            display: block;
+            max-width: 620px;
+            margin: auto;
+        }
+
+        .submission-page .hero-text,
+        .submission-page .features,
+        .submission-page .request-dashboard {
+            display: none;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+
+            align-items: center;
+        }
+
+
+        /* =========================
+           HERO TEXT
+        ========================= */
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 12px;
+
+            border: 1px solid var(--line);
+            border-radius: 20px;
+
+            background: var(--surface-soft);
+
+            color: var(--mint);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .tag-dot {
+            width: 6px;
+            height: 6px;
+
+            background: var(--amber-strong);
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: 1.05;
+
+            letter-spacing: -2.5px;
+
+            color: var(--amber);
+
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--amber-strong);
+        }
+
+        .hero-description {
+            color: var(--text);
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            max-width: 520px;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================
+           HERO BUTTONS
+        ========================= */
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .primary-button {
+            padding: 13px 20px;
+
+            background: var(--mint);
+            color: var(--page-deep);
+
+            border: none;
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .primary-button:hover {
+            background: var(--amber);
+            transform: translateY(-1px);
+        }
+
+        .secondary-button {
+            padding: 13px 20px;
+
+            background: transparent;
+            color: var(--text);
+
+            border: 1px solid var(--line);
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .secondary-button:hover {
+            background: rgba(169, 230, 196, 0.12);
+        }
+
+
+        /* =========================
+           REPORT CARD
+        ========================= */
+
+        .report-card {
+            background: var(--surface);
+
+            border: 1px solid var(--line);
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            font-size: 20px;
+            color: var(--amber);
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .ai-badge {
+            padding: 6px 9px;
+
+            background: rgba(169, 230, 196, 0.12);
+            border: 1px solid var(--mint);
+
+            color: var(--mint);
+
+            border-radius: 5px;
+
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           UPLOAD AREA
+        ========================= */
+
+        .upload-box {
+            display: block;
+
+            border: 1px dashed var(--line);
+
+            background: var(--surface-dark);
+
+            border-radius: 9px;
+
+            padding: 38px 20px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            margin-bottom: 15px;
+        }
+
+        .upload-box:hover {
+            border-color: var(--mint);
+            background: rgba(169, 230, 196, 0.12);
+        }
+
+        .photo-action-button {
+            width: 100%;
+            min-height: 44px;
+            margin-bottom: 14px;
+            padding: 10px 14px;
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            color: var(--text);
+            cursor: pointer;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .photo-action-button:hover {
+            border-color: var(--mint);
+            color: var(--mint);
+        }
+
+        .photo-action-button:focus-visible {
+            outline: 2px solid var(--mint);
+            outline-offset: 2px;
+        }
+
+        .camera-panel {
+            margin-bottom: 14px;
+            padding: 12px;
+            background: var(--surface-dark);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        .camera-panel[hidden] {
+            display: none;
+        }
+
+        .camera-video {
+            display: block;
+            width: 100%;
+            max-height: 320px;
+            aspect-ratio: 4 / 3;
+            margin-bottom: 10px;
+            background: #000;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .camera-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .camera-controls .photo-action-button {
+            margin-bottom: 0;
+        }
+
+        .camera-controls .capture-button {
+            background: var(--mint);
+            border-color: var(--mint);
+            color: var(--page-deep);
+        }
+
+        .photo-analysis {
+            margin: 0 0 15px;
+            padding: 14px;
+            background: var(--surface-dark);
+            border: 1px solid var(--line);
+            border-radius: 7px;
+        }
+
+        .photo-analysis[hidden] {
+            display: none;
+        }
+
+        .analysis-heading {
+            margin-bottom: 8px;
+            color: var(--mint);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .analysis-list {
+            display: grid;
+            gap: 5px;
+            padding-left: 18px;
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .analysis-notice {
+            margin-top: 10px;
+            color: var(--amber);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+
+            margin: 0 auto 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(169, 230, 196, 0.14);
+
+            border-radius: 10px;
+
+            font-size: 21px;
+        }
+
+        .photo-preview {
+            display: none;
+            width: min(100%, 260px);
+            max-height: 180px;
+            margin: 0 auto 14px;
+            object-fit: cover;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        .upload-box h3 {
+            font-size: 14px;
+            color: var(--amber);
+            margin-bottom: 7px;
+        }
+
+        .upload-box p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        .report-title-label {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .report-title {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: var(--surface-dark);
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            color: var(--text);
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .report-title::placeholder {
+            color: var(--muted);
+        }
+
+        .report-title:focus {
+            outline: 2px solid var(--mint);
+            outline-offset: 2px;
+        }
+
+        .report-details {
+            min-height: 88px;
+            resize: vertical;
+        }
+
+        .ai-button {
+            width: 100%;
+            min-height: 44px;
+            margin-bottom: 8px;
+            background: transparent;
+            border: 1px solid var(--mint);
+            border-radius: 7px;
+            color: var(--mint);
+            cursor: pointer;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .ai-button:hover:not(:disabled) {
+            background: rgba(169, 230, 196, 0.12);
+        }
+
+        .ai-button:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        .ai-note {
+            margin-bottom: 15px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           LOCATION
+        ========================= */
+
+        .location-button {
+            width: 100%;
+
+            padding: 12px;
+
+            background: var(--surface-dark);
+
+            color: var(--text);
+
+            border: 1px solid var(--line);
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+
+            transition: 0.2s;
+        }
+
+        .location-button:hover {
+            background: rgba(169, 230, 196, 0.12);
+            border-color: var(--mint);
+        }
+
+
+        /* =========================
+           SUBMIT
+        ========================= */
+
+        .submit-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: var(--mint);
+
+            color: var(--page-deep);
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+            touch-action: manipulation;
+
+            transition: 0.2s;
+        }
+
+        .submit-button:hover {
+            background: var(--amber);
+        }
+
+        .report-message {
+            min-height: 20px;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .report-message.error {
+            color: var(--amber);
+        }
+
+
+        /* =========================
+           REQUEST DASHBOARD
+        ========================= */
+
+        .request-dashboard {
+            margin-top: 80px;
+        }
+
+        .dashboard-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .dashboard-heading h2 {
+            color: var(--amber);
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .dashboard-heading p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .clear-dashboard-button {
+            padding: 8px 11px;
+            background: transparent;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            color: var(--muted);
+            cursor: pointer;
+            font: inherit;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .clear-dashboard-button:hover {
+            border-color: var(--amber);
+            color: var(--amber);
+        }
+
+        .dashboard-updated {
+            color: var(--mint);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .dashboard-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .summary-item {
+            padding: 17px 18px;
+            background: rgba(8, 11, 18, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .summary-label {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .summary-value {
+            color: var(--amber);
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .pending-list {
+            overflow: hidden;
+            background: rgba(8, 11, 18, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .pending-empty {
+            padding: 28px 20px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .pending-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto auto;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .pending-row:last-child {
+            border-bottom: none;
+        }
+
+        .pending-title {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .pending-meta {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .request-status {
+            padding: 6px 9px;
+            border: 1px solid #facc15;
+            border-radius: 5px;
+            color: var(--amber);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .request-time {
+            color: var(--muted);
+            font-size: 12px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .resolve-button {
+            padding: 7px 10px;
+            background: transparent;
+            border: 1px solid var(--mint);
+            border-radius: 5px;
+            color: var(--mint);
+            cursor: pointer;
+            font: inherit;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .resolve-button:hover {
+            background: rgba(169, 230, 196, 0.14);
+        }
+
+        .resolve-button:focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: 2px;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 80px;
+        }
+
+        .feature {
+            padding: 20px;
+
+            background: var(--surface-soft);
+
+            border: 1px solid var(--line);
+
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 20px;
+
+            margin-bottom: 13px;
+        }
+
+        .feature h3 {
+            font-size: 14px;
+
+            color: var(--amber);
+
+            margin-bottom: 7px;
+        }
+
+        .feature p {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            border-top: 1px solid var(--line);
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                height: 64px;
+                padding: 0 max(16px, env(safe-area-inset-left));
+            }
+
+            .logo {
+                gap: 8px;
+                font-size: 19px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            main {
+                padding: 38px 16px calc(42px + env(safe-area-inset-bottom));
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .hero-text {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: clamp(38px, 11vw, 52px);
+                letter-spacing: -1px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .hero-buttons {
+                gap: 10px;
+            }
+
+            .hero-buttons a,
+            .primary-button,
+            .secondary-button,
+            .location-button,
+            .submit-button {
+                width: 100%;
+                min-height: 48px;
+            }
+
+            .report-card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .report-title {
+                min-height: 48px;
+                font-size: 16px;
+            }
+
+            .upload-box {
+                padding: 28px 14px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                margin-top: 50px;
+            }
+
+            .request-dashboard {
+                margin-top: 55px;
+            }
+
+            .dashboard-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .dashboard-heading h2 {
+                font-size: 22px;
+            }
+
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .pending-row {
+                grid-template-columns: 1fr auto;
+                gap: 12px;
+                padding: 16px;
+            }
+
+            .request-time {
+                grid-column: 1 / -1;
+                text-align: left;
+            }
+
+            .resolve-button {
+                grid-column: 1 / -1;
+                justify-self: start;
+                min-height: 42px;
+            }
+
+            footer {
+                padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .card-header {
+                gap: 12px;
+            }
+
+            .ai-badge {
+                flex-shrink: 0;
+            }
+
+            .pending-row {
+                grid-template-columns: 1fr;
+            }
+
+            .request-status,
+            .request-time {
+                justify-self: start;
+                text-align: left;
+            }
+
+            .resolve-button {
+                grid-column: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
+        @media (hover: none) {
+
+            .primary-button:hover,
+            .submit-button:hover {
+                background: var(--mint);
+                transform: none;
+            }
+
+            .secondary-button:hover {
+                background: transparent;
+            }
+
+            .location-button:hover {
+                background: var(--surface-dark);
+                border-color: var(--line);
+            }
+        }
+    </style>
+</head>
+
+
+<body class="submission-page">
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav>
+
+        <a class="logo" href="/" aria-label="Kita - Kita home">
+            <img src="/logo.png" alt="">
+            Kita - Kita
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/submit" aria-current="page">Submit</a>
+            <a href="/dashboard">Dashboard</a>
+        </div>
+
+
+        <div class="status">
+
+            <div class="status-dot"></div>
+
+            Community system online
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main>
+
+        <section class="hero">
+
+
+            <!-- HERO TEXT -->
+
+            <div class="hero-text">
+
+                <div class="tag">
+
+                    <div class="tag-dot"></div>
+
+                    COMMUNITY SAFETY PLATFORM
+
+                </div>
+
+
+                <h1>
+
+                    See it.
+                    <span>Report it.</span>
+                    Make a difference.
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Kita - Kita helps communities report
+                    dangerous obstructions and public hazards
+                    with a simple photo-based submission that
+                    helps the right people respond faster.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="#report">
+
+                        <button class="primary-button">
+                            Report an Issue →
+                        </button>
+
+                    </a>
+
+
+                    <button
+                        class="secondary-button"
+                        onclick="learnMore()"
+                    >
+                        How it works
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REPORT CARD -->
+
+            <div class="report-card" id="report">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                    <label for="reporterName" class="report-title-label">
+                        Your name
+                    </label>
+                    <input
+                        type="text"
+                        id="reporterName"
+                        class="report-title"
+                        placeholder="Name for report verification"
+                        maxlength="100"
+                        autocomplete="name"
+                        required
+                    >
+
+                            New Report
+                        </h2>
+
+                        <p>
+                            Submit a community obstruction
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- REPORT TITLE -->
+
+                <label
+                    for="issueTitle"
+                    class="report-title-label"
+                >
+                    What needs attention?
+                </label>
+
+                <input
+                    type="text"
+                    id="issueTitle"
+                    class="report-title"
+                    placeholder="Example: Blocked sidewalk near Oak Street"
+                    maxlength="120"
+                >
+
+                <label for="issueCategory" class="report-title-label">
+                    Type of obstruction
+                </label>
+                <select id="issueCategory" class="report-title" required onchange="updateOtherCategoryField()">
+                    <option value="" selected disabled>Choose a category</option>
+                    <option value="Blocked sidewalk">Blocked sidewalk</option>
+                    <option value="Road hazard">Road hazard</option>
+                    <option value="Illegal parking">Illegal parking</option>
+                    <option value="Damaged infrastructure">Damaged infrastructure</option>
+                    <option value="Debris or obstruction">Debris or obstruction</option>
+                    <option value="Other">Others</option>
+                </select>
+
+                <div id="otherCategoryDetails" hidden>
+                    <label for="otherObstruction" class="report-title-label">
+                        Others: describe the obstruction
+                    </label>
+                    <input
+                        type="text"
+                        id="otherObstruction"
+                        class="report-title"
+                        placeholder="What obstruction did you see?"
+                        maxlength="400"
+                    >
+                </div>
+
+
+
+                <!-- PHOTO UPLOAD -->
+
+                <label
+                    for="photoInput"
+                    class="upload-box"
+                >
+
+                    <div class="upload-icon">
+                        📷
+                    </div>
+
+                    <img
+                        id="photoPreview"
+                        class="photo-preview"
+                        alt="Selected report preview"
+                    >
+
+
+                    <h3>
+                        Upload an image
+                    </h3>
+
+
+                    <p>
+                        JPG, PNG or HEIC
+                    </p>
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                    onchange="previewPhoto(event)"
+                >
+
+                <button
+                    type="button"
+                    class="photo-action-button"
+                    id="cameraButton"
+                    onclick="openCamera()"
+                >
+                    Use camera
+                </button>
+
+                <div class="camera-panel" id="cameraPanel" hidden>
+                    <video
+                        class="camera-video"
+                        id="cameraVideo"
+                        autoplay
+                        muted
+                        playsinline
+                        aria-label="Live camera preview"
+                    ></video>
+                    <div class="camera-controls">
+                        <button
+                            type="button"
+                            class="photo-action-button capture-button"
+                            onclick="capturePhoto()"
+                        >
+                            Take photo
+                        </button>
+                        <button
+                            type="button"
+                            class="photo-action-button"
+                            onclick="closeCamera()"
+                        >
+                            Close camera
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LOCATION -->
+
+                <button
+                    class="location-button"
+                    id="locationButton"
+                    type="button"
+                    onclick="getLocation()"
+                >
+
+                    📍
+                    Detect my location
+
+                </button>
+
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    class="submit-button"
+                    type="button"
+                    onclick="submitReport()"
+                >
+
+                    Submit Community Report
+
+                </button>
+
+                <div
+                    id="reportMessage"
+                    class="report-message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             PENDING REQUEST DASHBOARD
+        ========================= -->
+
+        <section class="request-dashboard" aria-labelledby="pending-title">
+
+            <div class="dashboard-heading">
+
+                <div>
+                    <h2 id="pending-title">Pending requests</h2>
+                    <p>Keep track of reports waiting for local response.</p>
+                </div>
+
+                <div>
+                    <button
+                        class="clear-dashboard-button"
+                        type="button"
+                        onclick="clearDashboard()"
+                    >
+                        Clear dashboard
+                    </button>
+                    <div class="dashboard-updated">Updated just now</div>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-summary">
+
+                <div class="summary-item">
+                    <span class="summary-label">Open reports</span>
+                    <span class="summary-value" id="openReportsCount">0</span>
+                </div>
+
+            </div>
+
+
+            <div class="pending-list">
+                <div class="pending-empty">Loading pending reports...</div>
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FEATURES
+        ========================= -->
+
+        <section class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ◉
+                </div>
+
+                <h3>
+                    Identify
+                </h3>
+
+                <p>
+                    Capture an obstruction through
+                    your phone or computer.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ◎
+                </div>
+
+                <h3>
+                    Locate
+                </h3>
+
+                <p>
+                    Attach the location so responders
+                    know exactly where the issue is.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ◇
+                </div>
+
+                <h3>
+                    Notify
+                </h3>
+
+                <p>
+                    Generate a clear report that can
+                    be forwarded to local personnel.
+                </p>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        Kita - Kita — Community Obstruction Reporting System
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        let currentLocation = null;
+        let cameraStream = null;
+        let capturedPhoto = null;
+        let photoPreviewUrl = null;
+        const isLocalFile = window.location.protocol === "file:";
+        const isLocalPreview =
+            ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+            window.location.port !== "3000";
+        const API_BASE_URL =
+            isLocalFile || isLocalPreview
+                ? "http://localhost:3000"
+                : "";
+
+
+        async function loadPendingReports() {
+
+            const list = document.querySelector(".pending-list");
+
+            try {
+                const response = await fetch(API_BASE_URL + "/api/reports");
+
+                if (!response.ok) {
+                    throw new Error("Could not load pending reports.");
+                }
+
+                const reports = await response.json();
+                renderPendingReports(reports);
+            } catch (error) {
+                list.replaceChildren();
+
+                const emptyState = document.createElement("div");
+                emptyState.className = "pending-empty";
+                emptyState.textContent =
+                    "Pending reports are unavailable. Start the backend and refresh.";
+                list.append(emptyState);
+            }
+        }
+
+
+        function updatePhotoPreview(file) {
+            const preview = document.getElementById("photoPreview");
+            const uploadBox = document.querySelector(".upload-box");
+
+            if (!file) {
+                if (photoPreviewUrl) {
+                    URL.revokeObjectURL(photoPreviewUrl);
+                    photoPreviewUrl = null;
+                }
+                preview.removeAttribute("src");
+                preview.style.display = "none";
+                return;
+            }
+
+            if (photoPreviewUrl) {
+                URL.revokeObjectURL(photoPreviewUrl);
+            }
+            photoPreviewUrl = URL.createObjectURL(file);
+            preview.src = photoPreviewUrl;
+            preview.style.display = "block";
+            uploadBox.querySelector("h3").textContent = "Image selected";
+            uploadBox.querySelector("p").textContent = file.name;
+        }
+
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            capturedPhoto = null;
+            stopCamera();
+            updatePhotoPreview(file);
+        }
+
+        function updateOtherCategoryField() {
+            const isOther =
+                document.getElementById("issueCategory").value === "Other";
+            const otherField = document.getElementById("otherCategoryDetails");
+            const otherInput = document.getElementById("otherObstruction");
+
+            otherField.hidden = !isOther;
+            otherInput.required = isOther;
+        }
+
+        async function openCamera() {
+            if (!window.isSecureContext) {
+                setReportMessage(
+                    "Camera access requires HTTPS or localhost. You can still upload a photo.",
+                    true
+                );
+                return;
+            }
+
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                setReportMessage(
+                    "Camera access is not supported here. You can still upload a photo.",
+                    true
+                );
+                return;
+            }
+
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({
+                    audio: false,
+                    video: { facingMode: { ideal: "environment" } }
+                });
+
+                const video = document.getElementById("cameraVideo");
+                video.srcObject = cameraStream;
+                document.getElementById("cameraPanel").hidden = false;
+                document.getElementById("cameraButton").hidden = true;
+                await video.play();
+                setReportMessage("Camera ready. Take a photo when the issue is in view.");
+            } catch (error) {
+                stopCamera();
+                const message = error.name === "NotAllowedError"
+                    ? "Camera permission was denied. You can still upload a photo."
+                    : error.name === "NotFoundError"
+                        ? "No camera was found. You can still upload a photo."
+                        : "Unable to open the camera. You can still upload a photo.";
+                setReportMessage(message, true);
+            }
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+
+            const video = document.getElementById("cameraVideo");
+            if (video) {
+                video.srcObject = null;
+            }
+
+            const cameraPanel = document.getElementById("cameraPanel");
+            const cameraButton = document.getElementById("cameraButton");
+            if (cameraPanel) {
+                cameraPanel.hidden = true;
+            }
+            if (cameraButton) {
+                cameraButton.hidden = false;
+            }
+        }
+
+        function closeCamera() {
+            stopCamera();
+            setReportMessage("Camera closed.");
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById("cameraVideo");
+            if (!video.videoWidth || !video.videoHeight) {
+                setReportMessage("The camera is not ready yet. Try again in a moment.", true);
+                return;
+            }
+
+            const scale = Math.min(
+                1,
+                1920 / Math.max(video.videoWidth, video.videoHeight)
+            );
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.round(video.videoWidth * scale);
+            canvas.height = Math.round(video.videoHeight * scale);
+            canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(blob => {
+                if (!blob) {
+                    setReportMessage("Could not capture the photo. Try again.", true);
+                    return;
+                }
+
+                capturedPhoto = new File([blob], "report-photo.jpg", {
+                    type: "image/jpeg",
+                    lastModified: Date.now()
+                });
+                document.getElementById("photoInput").value = "";
+                updatePhotoPreview(capturedPhoto);
+                stopCamera();
+                setReportMessage("Photo captured and ready to submit.");
+            }, "image/jpeg", 0.88);
+        }
+
+        window.addEventListener("pagehide", stopCamera);
+
+        // =========================
+        // LOCATION
+        // =========================
+
+        function getLocation() {
+
+            const locationButton =
+                document.getElementById("locationButton");
+
+            return new Promise(resolve => {
+
+                if (!navigator.geolocation) {
+                    setReportMessage(
+                        "This device does not support location services.",
+                        true
+                    );
+                    resolve(false);
+                    return;
+                }
+
+                locationButton.textContent = "Detecting location...";
+                locationButton.disabled = true;
+
+                navigator.geolocation.getCurrentPosition(
+
+                    function(position) {
+
+                        const latitude =
+                            position.coords.latitude;
+
+                        const longitude =
+                            position.coords.longitude;
+
+                        currentLocation = {
+                            latitude,
+                            longitude
+                        };
+
+                        locationButton.textContent =
+                            "Location detected: " +
+                            latitude.toFixed(4) +
+                            ", " +
+                            longitude.toFixed(4);
+                        locationButton.disabled = false;
+                        resolve(true);
+                    },
+
+                    function() {
+
+                        locationButton.textContent = "Detect my location";
+                        locationButton.disabled = false;
+                        setReportMessage(
+                            "Allow location access and try again.",
+                            true
+                        );
+                        resolve(false);
+                    },
+
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 300000
+                    }
+                );
+            });
+        }
+
+
+        // =========================
+        // SUBMIT REPORT
+        // =========================
+
+        function setReportMessage(message, isError = false) {
+
+            const reportMessage =
+                document.getElementById("reportMessage");
+
+            reportMessage.textContent = message;
+            reportMessage.classList.toggle("error", isError);
+        }
+
+        async function submitReport() {
+
+            const submitButton =
+                document.querySelector(".submit-button");
+
+            const photo =
+                capturedPhoto || document.getElementById("photoInput").files[0];
+
+            stopCamera();
+
+            const title =
+                document.getElementById(
+                    "issueTitle"
+                ).value.trim();
+            const category =
+                document.getElementById("issueCategory").value;
+            const otherObstruction =
+                document.getElementById("otherObstruction").value.trim();
+            const details = category === "Other" ? otherObstruction : "";
+            const name =
+                document.getElementById("reporterName").value.trim();
+
+            if (!name) {
+                setReportMessage("Please enter your name.", true);
+                return;
+            }
+
+
+            if (!photo) {
+                setReportMessage("Please upload a photo first.", true);
+                return;
+            }
+
+            if (!title) {
+                setReportMessage("Please describe the issue first.", true);
+                return;
+            }
+
+            if (!category) {
+                setReportMessage("Please choose an obstruction category.", true);
+                return;
+            }
+
+            if (category === "Other" && !details) {
+                setReportMessage("Please describe the other obstruction.", true);
+                return;
+            }
+
+            if (!currentLocation) {
+                setReportMessage("Requesting your location...");
+                const locationReady = await getLocation();
+
+                if (!locationReady) {
+                    return;
+                }
+            }
+
+            const reportData = new FormData();
+            reportData.append("photo", photo);
+            reportData.append("name", name);
+            reportData.append("title", title);
+            reportData.append("details", details);
+            reportData.append("category", category);
+            reportData.append("latitude", currentLocation.latitude);
+            reportData.append("longitude", currentLocation.longitude);
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting report...";
+            setReportMessage("Sending your report...");
+
+            try {
+                const response = await fetch(API_BASE_URL + "/api/reports", {
+                    method: "POST",
+                    body: reportData
+                });
+
+                const responseText = await response.text();
+                let result;
+
+                try {
+                    result = responseText ? JSON.parse(responseText) : {};
+                } catch (parseError) {
+                    throw new Error(
+                        `The backend returned an invalid response (${response.status}). ` +
+                        "Make sure you opened System.html through the running backend."
+                    );
+                }
+
+                if (!response.ok) {
+                    throw new Error(result.error || "Report submission failed.");
+                }
+
+                loadPendingReports();
+
+                const smsSent =
+                    result.notification && result.notification.sms &&
+                    result.notification.sms.sent;
+                const emailSent =
+                    result.notification && result.notification.email &&
+                    result.notification.email.sent;
+                const notificationMessage =
+                    emailSent && smsSent
+                        ? "Email and SMS notifications sent."
+                        : emailSent
+                            ? "Email notification sent."
+                            : smsSent
+                                ? "SMS notification sent."
+                                : "No notification was sent. Check your .env settings.";
+
+                alert(
+                    "Report created successfully!\n\n" +
+                    notificationMessage
+                );
+                setReportMessage("Report submitted successfully.");
+            } catch (error) {
+                setReportMessage(error.message, true);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Community Report";
+            }
+
+        }
+
+
+        function renderPendingReports(reports) {
+
+            const pendingReports = reports.filter(
+                report => report.status === "Pending"
+            );
+            const count = document.getElementById("openReportsCount");
+            const list = document.querySelector(".pending-list");
+
+            count.textContent = String(pendingReports.length);
+            list.replaceChildren();
+
+            if (pendingReports.length === 0) {
+                const emptyState = document.createElement("div");
+                emptyState.className = "pending-empty";
+                emptyState.textContent = "No pending reports yet.";
+                list.append(emptyState);
+                return;
+            }
+
+            pendingReports.forEach(addPendingReport);
+        }
+
+
+        async function clearDashboard() {
+
+            if (!window.confirm("Clear all reports from the dashboard?")) {
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    API_BASE_URL + "/api/reports",
+                    { method: "DELETE" }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok || !result.cleared) {
+                    throw new Error("Could not clear the dashboard.");
+                }
+
+                await loadPendingReports();
+            } catch (error) {
+                setReportMessage(error.message, true);
+            }
+        }
+
+
+        function addPendingReport(report) {
+
+            const list = document.querySelector(".pending-list");
+            const row = document.createElement("div");
+            const details = document.createElement("div");
+            const title = document.createElement("div");
+            const meta = document.createElement("div");
+            const description = document.createElement("div");
+            const status = document.createElement("span");
+            const time = document.createElement("span");
+            const resolveButton = document.createElement("button");
+
+            row.className = "pending-row";
+            title.className = "pending-title";
+            meta.className = "pending-meta";
+            description.className = "pending-meta";
+            status.className = "request-status";
+            time.className = "request-time";
+            resolveButton.className = "resolve-button";
+
+            title.textContent = report.title;
+            const categoryLabel = report.category === "Other" && report.details
+                ? `Others: ${report.details}`
+                : report.category || "Other";
+            meta.textContent = `Report #${report.id} - ${categoryLabel} - Submitted by ${report.name || "Unknown"}`;
+            description.textContent = report.details || "";
+            status.textContent = report.status;
+            time.textContent = formatReportTime(report.createdAt);
+            resolveButton.type = "button";
+            resolveButton.textContent = "Mark resolved";
+            resolveButton.addEventListener(
+                "click",
+                () => resolveReport(report.id)
+            );
+
+            details.append(title, meta);
+            if (report.details && report.category !== "Other") {
+                details.append(description);
+            }
+            row.append(details, status, time, resolveButton);
+            list.append(row);
+        }
+
+
+        async function resolveReport(reportId) {
+
+            if (!window.confirm("Mark this report as resolved?")) {
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/reports/${reportId}/resolve`,
+                    { method: "PATCH" }
+                );
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || "Could not resolve report.");
+                }
+
+                await loadPendingReports();
+                alert(`Report ${result.report.id} is now resolved.`);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+
+        function formatReportTime(createdAt) {
+
+            const createdTime = new Date(createdAt).getTime();
+            const elapsedMinutes = Math.max(
+                0,
+                Math.floor((Date.now() - createdTime) / 60000)
+            );
+
+            if (elapsedMinutes < 1) {
+                return "just now";
+            }
+
+            if (elapsedMinutes < 60) {
+                return `${elapsedMinutes} min ago`;
+            }
+
+            return `${Math.floor(elapsedMinutes / 60)} hr ago`;
+        }
+
+
+
+        // =========================
+        // HOW IT WORKS
+        // =========================
+
+        function learnMore() {
+
+            alert(
+                "Kita - Kita works in three steps:\n\n" +
+                "1. Capture an obstruction\n" +
+                "2. Identify and locate the issue\n" +
+                "3. Notify the appropriate personnel"
+            );
+
+        }
+
+
+        document.addEventListener("DOMContentLoaded", loadPendingReports);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_web_url:
+        description: HTTPS URL of the hosted Kita-Kita app
+        required: true
+        default: https://scientific-labour-respected-excessive.trycloudflare.com
+        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - "capacitor.config.ts"
+      - "package.json"
+      - "package-lock.json"
+      - "android/**"
+      - ".github/workflows/android-apk.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      APP_WEB_URL: ${{ github.event.inputs.app_web_url || vars.APP_WEB_URL || 'https://scientific-labour-respected-excessive.trycloudflare.com' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Sync hosted app URL
+        run: npx cap sync android
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
+        working-directory: android
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kita-kita-android-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

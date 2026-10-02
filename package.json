@@ -6,14 +6,21 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "android:sync": "cap sync android"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
     "@supabase/supabase-js": "^2.117.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "multer": "^2.0.2",
     "nodemailer": "^10.0.10",
     "twilio": "^5.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
+    "typescript": "^7.0.2"
   }
 }

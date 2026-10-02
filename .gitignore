@@ -5,3 +5,6 @@ data/
 .venv/
 .yolo-models/
 yolo11n.pt
+android/.gradle/
+android/local.properties
+android/app/build/
